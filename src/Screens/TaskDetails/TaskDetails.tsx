@@ -1,14 +1,40 @@
 // src/screens/TaskDetailScreen.tsx
 import React from 'react';
-import { View, FlatList, Text, Button, StyleSheet, Image, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  SafeAreaView,
+  ScrollView,
+} from 'react-native';
 
-const EditTask = ({ route, navigation }: any) => {
-  const { task } = route.params;
+// Define types for the route params
+interface Task {
+  taskTitle: string;
+  taskDetail: string;
+}
+
+interface RouteParams {
+  task: Task;
+}
+
+interface EditTaskProps {
+  route: {params: RouteParams};
+  navigation: {
+    goBack: () => void;
+  };
+}
+
+const EditTask: React.FC<EditTaskProps> = ({route, navigation}) => {
+  const {task} = route.params;
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headingOne} onPress={() => navigation.goBack()}>Back</Text>
+        <Text style={styles.headingOne} onPress={() => navigation.goBack()}>
+          Back
+        </Text>
 
         <Text style={styles.heading}>Task Details</Text>
         <Image
@@ -29,7 +55,7 @@ const EditTask = ({ route, navigation }: any) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#000' },
+  container: {flex: 1, backgroundColor: '#000'},
   header: {
     width: '100%',
     height: 60,
@@ -39,17 +65,23 @@ const styles = StyleSheet.create({
     paddingHorizontal: 3,
     flexDirection: 'row',
   },
-  mainContainer: { flex: 1, padding: 15, alignItems: 'center' },
-  task: { padding: 10, borderBottomWidth: 1 },
-  headingOne: { fontSize: 15, fontWeight: 'bold', color: '#fff' },
-  heading: { fontSize: 20, fontWeight: 'bold', color: '#fff' },
-  headingTitle: { fontSize: 18, fontWeight: 'bold', color: '#fff' },
+  mainContainer: {flex: 1, padding: 15, alignItems: 'center'},
+  task: {padding: 10, borderBottomWidth: 1},
+  headingOne: {fontSize: 15, fontWeight: 'bold', color: '#fff'},
+  heading: {fontSize: 20, fontWeight: 'bold', color: '#fff'},
+  headingTitle: {fontSize: 18, fontWeight: 'bold', color: '#fff'},
   logo: {
     width: 45,
     height: 45,
     resizeMode: 'contain',
   },
-  headingInner: { fontSize: 18, fontWeight: 'bold', color: '#fff', textAlign: 'center', height: 60 },
+  headingInner: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#fff',
+    textAlign: 'center',
+    height: 60,
+  },
   innerMain: {
     padding: 10,
     flex: 1,
@@ -62,7 +94,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   innerMainText: {
-    fontSize: 16, color: '#fff'
+    fontSize: 16,
+    color: '#fff',
   },
   button: {
     backgroundColor: '#DC143C',
@@ -71,9 +104,9 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 50
+    marginTop: 50,
   },
-  buttonText: { color: '#fff', fontSize: 18 }
+  buttonText: {color: '#fff', fontSize: 18},
 });
 
 export default EditTask;
